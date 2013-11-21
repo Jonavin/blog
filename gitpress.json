@@ -1,7 +1,7 @@
 {
 	"docs"      : ["posts"],	
-	"perpage"   : 5,
-	"template"  : "default",
+	"perpage"   : 10,
+	"template"  : "slate",
 	"types"     : {
 		"\\.(md||markdown)$"   : "markdown", 
 		"\\.(js||css||json)$"  : "code",
