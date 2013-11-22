@@ -9,7 +9,7 @@
 		".*"                   : "text"		
 	},
 	"title"  : "Akira's Blog",
-	"comment"  : "on",
+	"comment"  : {"type": "duoshuo", "short_name":"akira-cn"},
 	"domain-alias"  : ["blog.weizoo.com", "silverna.org", "www.silverna.org", "blog.silverna.org"],
 	"friends"  : [
 		{
