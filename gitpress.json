@@ -46,6 +46,11 @@
 			"name"  : "aoao",
 			"title" : "样式之美 | 没落的角落",
 			"url"   : "http://www.aoao.org.cn/"
+		},
+		{
+			"name" : "前端开源推荐",
+			"title": "前端开源推荐",
+			"url"  : "http://boke.us/tags/weekly/"
 		}
 	] 
 }
