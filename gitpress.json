@@ -3,7 +3,8 @@
 		"其他": "posts",
 		"gitpress": "posts/gitpress",
 		"PHP": "posts/PHP",
-		"Python": "posts/python"
+		"Python": "posts/python",
+		"JavaScript": "posts/JavaScript"
 	},	
 	"perpage"   : 10,
 	"template"  : "pithiness",
