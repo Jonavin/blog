@@ -1,5 +1,5 @@
 {
-	"docs"      : ["posts"],	
+	"docs"      : {"未分类": "posts"},	
 	"perpage"   : 10,
 	"template"  : "pithiness",
 	"types"     : {
@@ -16,6 +16,11 @@
 			"name"  : "JerryQu的小站",
 			"title"  : "屈屈的博客",
 			"url"  : "http://imququ.com"		  
+		},
+		{
+			"name" : "welefen",
+			"title": "welefen",
+			"url"  : "http://www.welefen.com/"
 		},
 		{
 			"name"  : "奇舞团",
@@ -41,6 +46,11 @@
 			"name"  : "aoao",
 			"title" : "样式之美 | 没落的角落",
 			"url"   : "http://www.aoao.org.cn/"
+		},
+		{
+			"name" : "前端开源推荐",
+			"title": "前端开源推荐",
+			"url"  : "http://boke.us/tags/weekly/"
 		}
 	] 
 }
