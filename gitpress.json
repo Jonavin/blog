@@ -1,5 +1,8 @@
 {
-	"docs"      : {"未分类": "posts"},	
+	"docs"      : {
+		"未分类": "posts",
+		"算法": "posts/算法"
+	},	
 	"perpage"   : 10,
 	"template"  : "pithiness",
 	"types"     : {
