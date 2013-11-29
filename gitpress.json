@@ -1,7 +1,8 @@
 {
 	"docs"      : {
 		"其他": "posts",
-		"gitpress": "posts/gitpress"
+		"gitpress": "posts/gitpress",
+		"PHP": "posts/PHP"
 	},	
 	"perpage"   : 10,
 	"template"  : "pithiness",
