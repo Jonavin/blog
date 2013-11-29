@@ -1,6 +1,10 @@
 {
 	"docs"      : {
-		"未分类": "posts",
+		"其他": "posts",
+		"gitpress": "posts/gitpress",
+		"PHP": "posts/PHP",
+		"Python": "posts/python",
+		"JavaScript": "posts/JavaScript",
 		"算法": "posts/算法"
 	},	
 	"perpage"   : 10,
