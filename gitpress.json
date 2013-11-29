@@ -4,6 +4,7 @@
 		"gitpress": "posts/gitpress",
 		"PHP": "posts/PHP",
 		"Python": "posts/python",
+		"脚本": "posts/Js",
 		"算法": "posts/算法"
 	},	
 	"perpage"   : 10,
