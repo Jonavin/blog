@@ -17,7 +17,7 @@
 	},
 	"title"  : "Akira's Blog",
 	"comment"  : {"type": "duoshuo", "short_name":"akira-cn"},
-	"domain-alias"  : ["blog.weizoo.com", "silverna.org", "www.silverna.org", "blog.silverna.org"],
+	"domain-alias"  : ["~blog.weizoo.com", "silverna.org", "www.silverna.org", "blog.silverna.org"],
 	"friends"  : [
 		{
 			"name"  : "JerryQu的小站",
