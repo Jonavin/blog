@@ -163,3 +163,54 @@ bird.moveBy(0.3, cc.p(0, -20)).reverse().repeatAll().act();
 ```
 
 现在，我们拥有了一只在空中不断飞翔的小鸟
+
+### 响应 touch/鼠标 事件
+
+在 cqwrap 中，一个 GameLayer 是一个代理，它可以代理精灵们的事件，甚至可以代理自身的事件——
+
+```js
+this.delegate(this);    //将Layer的touch事件代理给Layer自身
+this.on('touchstart', function(){
+    //事件处理函数 
+});
+```
+
+### 让小鸟往高处飞
+
+我们添加让小鸟往高处飞的事件——
+
+```js
+this.on('touchstart', function(){
+    bird.stopAllActions();
+    bird.animate(0.2, 'bird1.png', 'bird2.png', 'bird3.png').repeat().act();
+
+    var jumpHeight = Math.min(1280 - birdY, 125);
+    bird.moveBy(0.2, cc.p(0, jumpHeight)).act();
+
+    bird.rotateTo(0.2, -30).act(); 
+});
+```
+
+### 让小鸟会掉落下来
+
+```js
+this.on('touchstart', function(){
+    var birdX = bird.getPositionX();
+    var birdY = bird.getPositionY();
+    var fallTime = birdY / 1000;
+
+    bird.stopAllActions();
+    bird.animate(0.2, 'bird1.png', 'bird2.png', 'bird3.png').repeat().act();
+
+    var jumpHeight = Math.min(1280 - birdY, 125);
+    bird.moveBy(0.2, cc.p(0, jumpHeight)).act();
+
+    bird.rotateTo(0.2, -30).act();
+    bird.delay(0.2).moveTo(fallTime, cc.p(birdX, 316), cc.EaseIn, 2)
+        .then(function(){
+            //小鸟掉落下来了
+            
+        }).act();
+    bird.delay(0.2).rotateTo(fallTime, 90, 0, cc.EaseIn, 2).act();    
+});
+```
