@@ -133,3 +133,33 @@ var MyLayer = GameLayer.extend({
     }
 });
 ```
+
+### 飞翔的小鸟
+
+有了一个会“前进”的地面之后，我们只要在空中放置一只小鸟，那么就可以制造出飞翔的效果了：
+
+```js
+//我是一只小小小小鸟
+var bird = cc.createSprite('bird1.png', {
+    anchor: [0.5, 0],
+    xy: [220, 650],
+    zOrder: 2
+});
+
+this.addChild(bird);        
+```
+
+cc.createSprite 是一个非常方便的方法，它是由cqwrap库提供的额外方法，可以用来更方便地创建各种 Sprite.
+
+现在我们创建了一只在空中的小鸟，它看起来会不断向前进，但是看起来比较奇怪，因为它的翅膀是不动的。
+
+我们可以执行动画，让小鸟动起来——
+
+```js
+
+//给小鸟增加飞行动画
+bird.animate(0.6, 'bird1.png', 'bird2.png', 'bird3.png').repeat().act();
+bird.moveBy(0.3, cc.p(0, -20)).reverse().repeatAll().act();
+```
+
+现在，我们拥有了一只在空中不断飞翔的小鸟
