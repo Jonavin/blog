@@ -14,6 +14,8 @@
 
 另外我们使用一个叫做 cqwrap 的库，这是一个我为 cocos2dx-jsb 和 cocos2dx-html5 定制的扩展，我在前一个开源的游戏 HappyGo 中也使用了它，你可以在[这里](http://go.akira-cn.gitpress.org/)看到我为它写的一个简易的使用文档，可以从 github 的这个项目中获得它的代码。
 
+<!--more-->
+
 ### 开始编码
 
 素材有了，框架也有了，这样就可以开工了。
@@ -209,7 +211,7 @@ this.on('touchstart', function(){
     bird.delay(0.2).moveTo(fallTime, cc.p(birdX, 316), cc.EaseIn, 2)
         .then(function(){
             //小鸟掉落下来了
-            
+
         }).act();
     bird.delay(0.2).rotateTo(fallTime, 90, 0, cc.EaseIn, 2).act();    
 });
