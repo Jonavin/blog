@@ -216,3 +216,105 @@ this.on('touchstart', function(){
     bird.delay(0.2).rotateTo(fallTime, 90, 0, cc.EaseIn, 2).act();    
 });
 ```
+
+现在我们有了一只会飞的小鸟，点击鼠标让它飞起来，如果不点击，它就会掉到地上。
+
+精灵的 animate 方法可以播放帧动画，只需要传给它每一帧的图片就行了，repeat表示重复播放，可以传一个参数表示次数，不传的话表示无限次重复。
+
+### 创建水管和让水管移动起来
+
+```js
+function createHose(dis){
+    var hoseHeight = 830;
+    var acrossHeight = 250;
+    var downHeight = 200 + (400 * Math.random() | 0);
+    var upHeight = 1000 - downHeight - acrossHeight;
+    
+    var n = (self.hoses.length / 2) | 0;
+    var hoseX = dis + 400 * n;
+
+    var hoseDown = cc.createSprite('holdback1.png', {
+        anchor: [0.5, 0],
+        xy: [hoseX, 270 + downHeight - 830],
+    });
+
+    var hoseUp = cc.createSprite('holdback2.png', {
+        anchor: [0.5, 0],
+        xy: [hoseX, 270 + downHeight + acrossHeight],
+    });
+
+    self.addChild(hoseDown);
+    self.addChild(hoseUp);
+
+    var moveByDis = hoseX+500;
+    hoseUp.moveBy(moveByDis/200, cc.p(-moveByDis, 0)).then(function(){
+        hoseUp.removeFromParent(true);
+    }).act();
+    hoseDown.moveBy(moveByDis/200, cc.p(-moveByDis, 0)).then(function(){
+        createHose(-500);
+        var idx = self.hoses.indexOf(hoseDown);
+        self.hoses.splice(idx, 2);
+        self.scoreBuf ++;
+        hoseDown.removeFromParent(true);
+    }).act();
+
+    self.hoses.push(hoseDown, hoseUp);
+    
+};
+```
+
+我们将上下两半部分水管的卡通分别计算位置，让缺口保持固定的大小，出现位置随机，然后将水管从屏幕外面往中间移动。
+
+由于考虑性能，我们回收使用过的水管精灵，所以我们把当前可用的精灵放在一个队列中，根据队列的数量来计算新生成的水管精灵的位置。
+
+### 计算小鸟和水管的碰撞
+
+```js
+//碰撞检测
+self.checker = self.setInterval(function(){
+    //cc.log(111);
+    var score = 0;
+
+    //这里可以用 boundingBox 的 上下左右的中间点来判断碰撞，会更准确一些
+    var box = bird.getBoundingBox();
+    var bottom = cc.p(box.x + box.width / 2, box.y);
+    var right = cc.p(box.x + box.width, box.y + box.height / 2);
+    var left = cc.p(box.x, box.y + box.height / 2);
+    var top = cc.p(box.x + box.width / 2, box.y + box.height);
+
+    self.hoses.some(function(hose){
+        var box = hose.getBoundingBox();
+
+        if(hose.getPositionX() <= 220) score ++;
+
+        //cc.log(score);
+
+        if(hose.getPositionX() > 0 && hose.getPositionX() < 720
+            //&& cc.rectIntersectsRect(hose.getBoundingBox(), bird.getBoundingBox())
+            && (cc.rectContainsPoint(box, left)
+                || cc.rectContainsPoint(box, right)
+                || cc.rectContainsPoint(box, top)
+                || cc.rectContainsPoint(box, bottom))){
+            //cc.log([hose.getBoundingBox(), bird.getBoundingBox()]);
+            layerMask.fadeIn(0.1).fadeOut(0.1).act();
+            Audio.playEffect('audio/sfx_hit.ogg');
+            self.status = 'falling';
+            return true;
+        }
+    });
+
+    //碰撞后小鸟掉下来，地面、水管都停止运动
+    if(self.status == 'falling'){
+        self.clearInterval(self.checker);
+        ground.stopAllActions();
+        
+        self.hoses.forEach(function(o){
+            o.stopAllActions();
+            //o.removeFromParent(true);
+        });
+    }
+
+}, 50)
+```
+
+基本的原理就这些了，剩下的就是一些细节，最终完整版的扑腾小鸟演示[点这里体验](http://go.weizoo.com/flappy)
